@@ -1,7 +1,12 @@
 package dingshaoshuai.baseext.mvvm
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import dingshaoshuai.base.mvvm.BaseViewModel
 import dingshaoshuai.base.mvvm.CallLiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @author: Xiao Bo
@@ -42,5 +47,35 @@ open class BasePageViewModel : BaseViewModel() {
 
     fun showSuccessPage() {
         pageChangeLiveData.successPageLiveData.call()
+    }
+
+    protected fun <T> launchOnPageSwitch(
+        block: suspend () -> T?,
+        checkEmptyBlock: (T?) -> Boolean,
+        checkErrorBlock: (T?) -> Boolean
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            showLoadingPage()
+            val value = withContext(Dispatchers.IO) {
+                try {
+                    block()
+                } catch (e: Exception) {
+                    showErrorPage()
+                    Log.e("BasePageViewModel", "launchOnPageSwitch Error: ${e.message}")
+                    null
+                }
+            }
+            when {
+                checkEmptyBlock(value) -> {
+                    showEmptyPage()
+                }
+                checkErrorBlock(value) -> {
+                    showErrorPage()
+                }
+                else -> {
+                    showSuccessPage()
+                }
+            }
+        }
     }
 }

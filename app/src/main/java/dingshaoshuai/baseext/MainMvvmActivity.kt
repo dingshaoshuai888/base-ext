@@ -28,4 +28,9 @@ class MainMvvmActivity : BasePageMvvmActivity<ActivityMainBinding, MainViewModel
             ViewModelProvider.NewInstanceFactory()
         ).get(MainViewModel::class.java)
     }
+
+    override fun initData() {
+        super.initData()
+        viewModel.launchOnPageSwitchTest()
+    }
 }
