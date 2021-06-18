@@ -52,7 +52,8 @@ open class BasePageViewModel : BaseViewModel() {
     protected fun <T> launchOnPageSwitch(
         block: suspend () -> T?,
         checkEmptyBlock: (T?) -> Boolean,
-        checkErrorBlock: (T?) -> Boolean
+        checkErrorBlock: (T?) -> Boolean,
+        successBlock: (T?) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.Main) {
             showLoadingPage()
@@ -73,6 +74,7 @@ open class BasePageViewModel : BaseViewModel() {
                     showErrorPage()
                 }
                 else -> {
+                    successBlock.invoke(value)
                     showSuccessPage()
                 }
             }
