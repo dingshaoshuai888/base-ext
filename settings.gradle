@@ -1,0 +1,3 @@
+include ':baseext'
+include ':app'
+rootProject.name = "base-ext-sample"
