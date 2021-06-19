@@ -1,5 +1,6 @@
 package dingshaoshuai.baseext
 
+import android.util.Log
 import dingshaoshuai.baseext.mvvm.BasePageViewModel
 import kotlinx.coroutines.delay
 
@@ -13,11 +14,13 @@ class MainViewModel : BasePageViewModel() {
     fun launchOnPageSwitchTest() {
         launchOnPageSwitch({
             delay(3000)
-            mutableListOf<String>()
+            mutableListOf("1")
         }, {
             it?.isEmpty() ?: false
         }, {
             it == null
+        }, {
+            Log.i("TAG", "launchOnPageSwitchTest: $it")
         })
     }
 }
