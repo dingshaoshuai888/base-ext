@@ -15,7 +15,7 @@ import dingshaoshuai.base.mvvm.BaseMvvmActivity
 abstract class BasePageMvvmActivity<T : ViewDataBinding, E : BasePageViewModel> :
     BaseMvvmActivity<T, E>() {
 
-    private lateinit var loadService: LoadService<*>
+    private var loadService: LoadService<*>? = null
     protected abstract val placeholderView: View
     protected abstract val loadingPageCallbackClazz: Class<out Callback>
     protected abstract val emptyPageCallbackClazz: Class<out Callback>
@@ -48,18 +48,18 @@ abstract class BasePageMvvmActivity<T : ViewDataBinding, E : BasePageViewModel> 
     }
 
     protected open fun showLoadingPage() {
-        loadService.showCallback(loadingPageCallbackClazz)
+        loadService?.showCallback(loadingPageCallbackClazz)
     }
 
     protected open fun showEmptyPage() {
-        loadService.showCallback(emptyPageCallbackClazz)
+        loadService?.showCallback(emptyPageCallbackClazz)
     }
 
     protected open fun showErrorPage() {
-        loadService.showCallback(errorPageCallbackClazz)
+        loadService?.showCallback(errorPageCallbackClazz)
     }
 
     protected open fun showSuccessPage() {
-        loadService.showSuccess()
+        loadService?.showSuccess()
     }
 }
