@@ -23,7 +23,11 @@ abstract class BasePageMvvmFragment<T : ViewDataBinding, E : BasePageViewModel> 
 
     override fun initCustom(view: View) {
         super.initCustom(view)
-        loadService = LoadSir.getDefault().register(placeholderView) {
+        loadService = initLoadService()
+    }
+
+    open fun initLoadService(): LoadService<*> {
+        return LoadSir.getDefault().register(placeholderView) {
             showLoadingPage()
             initData()
         }
