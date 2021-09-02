@@ -15,7 +15,7 @@ import dingshaoshuai.base.mvvm.BaseMvvmFragment
 abstract class BasePageMvvmFragment<T : ViewDataBinding, E : BasePageViewModel> :
     BaseMvvmFragment<T, E>() {
 
-    private var loadService: LoadService<*>? = null
+    protected var loadService: LoadService<*>? = null
     protected abstract val placeholderView: View
     protected abstract val loadingPageCallbackClazz: Class<out Callback>
     protected abstract val emptyPageCallbackClazz: Class<out Callback>
