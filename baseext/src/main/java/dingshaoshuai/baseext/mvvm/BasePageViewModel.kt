@@ -51,8 +51,9 @@ open class BasePageViewModel : BaseViewModel() {
 
     protected fun <T> launchOnPageSwitch(
         block: suspend () -> T?,
-        checkEmptyBlock: (T?) -> Boolean,
+        // 坑一波，让伙计们知道还是参数 checkErrorBlock = {} 方式好...
         checkErrorBlock: (T?) -> Boolean,
+        checkEmptyBlock: (T?) -> Boolean,
         successBlock: (T?) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -67,11 +68,11 @@ open class BasePageViewModel : BaseViewModel() {
                 }
             }
             when {
-                checkEmptyBlock(value) -> {
-                    showEmptyPage()
-                }
                 checkErrorBlock(value) -> {
                     showErrorPage()
+                }
+                checkEmptyBlock(value) -> {
+                    showEmptyPage()
                 }
                 else -> {
                     successBlock.invoke(value)
@@ -80,4 +81,5 @@ open class BasePageViewModel : BaseViewModel() {
             }
         }
     }
+
 }
