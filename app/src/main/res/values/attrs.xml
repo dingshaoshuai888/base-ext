@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="PlaceholderView" tools:ignore="ResourceName">
+        <attr name="PlaceholderView_img" format="reference" />
+        <attr name="PlaceholderView_text" format="color" />
+        <attr name="PlaceholderView_btnText" format="string" />
+        <attr name="PlaceholderView_btnDisplay" format="boolean" />
+    </declare-styleable>
+</resources>

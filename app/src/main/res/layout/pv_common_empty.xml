@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dingshaoshuai.baseext.view.PlaceholderView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pvEmpty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:PlaceholderView_btnDisplay="false"
+    app:PlaceholderView_img="@drawable/page_empty"
+    app:PlaceholderView_text="@string/empty"
+    app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+    app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+    app:layout_constraintStart_toStartOf="@+id/recyclerView"
+    app:layout_constraintTop_toTopOf="@+id/recyclerView" />
